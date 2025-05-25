@@ -2,8 +2,8 @@ module.exports = {
   apps: [
     {
       name: "verdant-website",
-      script: "npx",
-      args: "serve -s . -l 3000",
+      script: "python",
+      args: "-m http.server 3000",
       cwd: "/",
       instances: 1,
       autorestart: true,
