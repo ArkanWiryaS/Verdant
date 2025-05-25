@@ -2,7 +2,7 @@ module.exports = {
   apps: [
     {
       name: "verdant-website",
-      script: "python",
+      script: "python3",
       args: "-m http.server 3000",
       cwd: "/",
       instances: 1,
