@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../css/common.css" />
+    <link rel="stylesheet" href="../css/innovate-now.css" />
+    <title>Verdant | Innovate Now</title>
+  </head>
+  <body>
+    <nav>
+      <div class="nav__header">
+        <div class="nav__logo">
+          <a href="../index.html">
+            <img
+              src="../assets/logoVerdantWhite.svg"
+              alt="Verdant Logo"
+              class="logo-img"
+            />
+          </a>
+        </div>
+        <div class="nav__menu__btn" id="menu-btn">
+          <i class="ri-menu-3-line"></i>
+        </div>
+      </div>
+      <ul class="nav__links" id="nav-links">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="about.html">About Us</a></li>
+
+        <li>
+          <a href="face-mask-detection.html">AI-Powered Health Monitoring</a>
+        </li>
+        <li><a href="innovate-now.html" class="active">Innovate Now</a></li>
+        <li><a href="invest-now.html">Invest Now</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+
+    <section class="page__header">
+      <div class="header__content">
+        <h1 class="section__header">Innovate <span>Now</span></h1>
+        <p class="section__description">
+          Ready to make an impact? Join our innovation ecosystem and contribute
+          to sustainable industrial development. Submit your project idea or
+          apply to collaborate on existing initiatives.
+        </p>
+      </div>
+    </section>
+
+    <section class="section__container benefits__container">
+      <p class="section__subheader">Why Collaborate With Us</p>
+      <h2 class="section__header">
+        Innovation Benefits with <span>Verdant</span>
+      </h2>
+      <div class="benefits__grid">
+        <div class="benefit__card">
+          <span><i class="ri-funds-box-fill"></i></span>
+          <h3>Access to Funding</h3>
+          <p>
+            Connect with our network of investors and funding agencies focused
+            on sustainable innovation.
+          </p>
+        </div>
+        <div class="benefit__card">
+          <span><i class="ri-team-fill"></i></span>
+          <h3>Expert Collaboration</h3>
+          <p>
+            Work with our team of industry specialists, scientists, and
+            sustainability experts to refine your ideas.
+          </p>
+        </div>
+        <div class="benefit__card">
+          <span><i class="ri-tools-fill"></i></span>
+          <h3>Technical Resources</h3>
+          <p>
+            Gain access to our research facilities, prototyping labs, and
+            testing environments.
+          </p>
+        </div>
+        <div class="benefit__card">
+          <span><i class="ri-government-fill"></i></span>
+          <h3>Policy Support</h3>
+          <p>
+            Navigate regulatory frameworks with guidance from our policy experts
+            who understand sustainable industry requirements.
+          </p>
+        </div>
+        <div class="benefit__card">
+          <span><i class="ri-global-fill"></i></span>
+          <h3>Market Access</h3>
+          <p>
+            Leverage our connections to help scale your innovation across
+            Indonesia and international markets.
+          </p>
+        </div>
+        <div class="benefit__card">
+          <span><i class="ri-medal-fill"></i></span>
+          <h3>SDG Impact Measurement</h3>
+          <p>
+            Quantify your contribution to the Sustainable Development Goals with
+            our specialized assessment tools.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section__container booking__container">
+      <p class="section__subheader">Submit Your Idea</p>
+      <h2 class="section__header">Innovation <span>Submission Form</span></h2>
+
+      <form id="bookingForm" class="booking__form">
+        <div class="form__row">
+          <div class="form__group">
+            <label for="fullName">Full Name*</label>
+            <input
+              type="text"
+              id="fullName"
+              name="fullName"
+              placeholder="Enter your full name"
+              required
+            />
+            <span class="error-message" id="fullNameError"></span>
+          </div>
+
+          <div class="form__group">
+            <label for="email">Email Address*</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              placeholder="Enter your email"
+              required
+            />
+            <span class="error-message" id="emailError"></span>
+          </div>
+        </div>
+
+        <div class="form__row">
+          <div class="form__group">
+            <label for="phone">Phone Number*</label>
+            <input
+              type="tel"
+              id="phone"
+              name="phone"
+              placeholder="Enter your phone number"
+              required
+            />
+            <span class="error-message" id="phoneError"></span>
+          </div>
+
+          <div class="form__group">
+            <label for="organization">Organization/Company*</label>
+            <input
+              type="text"
+              id="organization"
+              name="organization"
+              placeholder="Enter your organization name"
+              required
+            />
+            <span class="error-message" id="organizationError"></span>
+          </div>
+        </div>
+
+        <div class="form__row">
+          <div class="form__group">
+            <label for="sector">Industry Sector*</label>
+            <select id="sector" name="sector" required>
+              <option value="">Select a sector</option>
+              <option value="manufacturing">Manufacturing</option>
+              <option value="energy">Renewable Energy</option>
+              <option value="transportation">Sustainable Transportation</option>
+              <option value="construction">Green Construction</option>
+              <option value="digital">Digital Infrastructure</option>
+              <option value="water">Water Management</option>
+              <option value="other">Other</option>
+            </select>
+            <span class="error-message" id="sectorError"></span>
+          </div>
+
+          <div class="form__group">
+            <label for="projectType">Project Type*</label>
+            <select id="projectType" name="projectType" required>
+              <option value="">Select project type</option>
+              <option value="new-innovation">New Innovation</option>
+              <option value="existing-project">Join Existing Project</option>
+              <option value="research">Research Collaboration</option>
+              <option value="funding">Funding Partnership</option>
+              <option value="implementation">Implementation Partner</option>
+            </select>
+            <span class="error-message" id="projectTypeError"></span>
+          </div>
+        </div>
+
+        <div class="form__row">
+          <div class="form__group">
+            <label for="projectTitle">Project Title*</label>
+            <input
+              type="text"
+              id="projectTitle"
+              name="projectTitle"
+              placeholder="Enter your project title"
+              required
+            />
+            <span class="error-message" id="projectTitleError"></span>
+          </div>
+
+          <div class="form__group">
+            <label for="estimatedBudget">Estimated Budget (USD)*</label>
+            <input
+              type="number"
+              id="estimatedBudget"
+              name="estimatedBudget"
+              placeholder="Enter estimated budget"
+              required
+            />
+            <span class="error-message" id="estimatedBudgetError"></span>
+          </div>
+        </div>
+
+        <div class="form__row">
+          <div class="form__group full-width">
+            <label for="projectDescription">Project Description*</label>
+            <textarea
+              id="projectDescription"
+              name="projectDescription"
+              rows="4"
+              placeholder="Describe your project, its goals, and expected impact"
+              required
+            ></textarea>
+            <span class="error-message" id="projectDescriptionError"></span>
+          </div>
+        </div>
+
+        <div class="form__row">
+          <div class="form__group full-width">
+            <label for="sdgImpact">SDG 9 Impact*</label>
+            <textarea
+              id="sdgImpact"
+              name="sdgImpact"
+              rows="4"
+              placeholder="Describe how your project contributes to SDG 9 targets (infrastructure, industrialization, innovation)"
+              required
+            ></textarea>
+            <span class="error-message" id="sdgImpactError"></span>
+          </div>
+        </div>
+
+        <div class="form__row">
+          <div class="form__group checkbox-group">
+            <input
+              type="checkbox"
+              id="termsConditions"
+              name="termsConditions"
+              required
+            />
+            <label for="termsConditions"
+              >I agree to the Terms and Conditions*</label
+            >
+            <span class="error-message" id="termsConditionsError"></span>
+          </div>
+        </div>
+
+        <button type="submit" class="btn booking-btn">Submit Project</button>
+      </form>
+    </section>
+
+    <section class="section__container innovation-process">
+      <p class="section__subheader">What Happens Next</p>
+      <h2 class="section__header">Our <span>Innovation Process</span></h2>
+
+      <div class="process-timeline">
+        <div class="process-step">
+          <div class="process-step-content">
+            <h3>Submission Review</h3>
+            <p>
+              Our expert panel evaluates your submission against our innovation
+              criteria and SDG 9 alignment (1-2 weeks).
+            </p>
+          </div>
+        </div>
+
+        <div class="process-step">
+          <div class="process-step-content">
+            <h3>Initial Consultation</h3>
+            <p>
+              Selected projects receive an initial consultation to discuss
+              details, refine the concept, and identify collaboration
+              opportunities.
+            </p>
+          </div>
+        </div>
+
+        <div class="process-step">
+          <div class="process-step-content">
+            <h3>Feasibility Assessment</h3>
+            <p>
+              Technical and financial evaluation to determine project viability,
+              resource requirements, and potential impact.
+            </p>
+          </div>
+        </div>
+
+        <div class="process-step">
+          <div class="process-step-content">
+            <h3>Partnership Agreement</h3>
+            <p>
+              Formalization of collaboration terms, roles, responsibilities, and
+              project timeline.
+            </p>
+          </div>
+        </div>
+
+        <div class="process-step">
+          <div class="process-step-content">
+            <h3>Project Launch</h3>
+            <p>
+              Implementation begins with resource allocation, team formation,
+              and project kickoff.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer-blue-gradient">
+      <div class="footer-container">
+        <div class="footer-column">
+          <div class="footer-logo">
+            <a href="index.html">
+              <img
+                src="../assets/logoVerdantWhite.svg"
+                alt="Verdant Logo"
+                class="logo-img"
+              />
+            </a>
+          </div>
+          <p class="footer-tagline">
+            Building sustainable industries since 2020
+          </p>
+        </div>
+
+        <div class="footer-menu-columns">
+          <div class="footer-menu-column">
+            <h4>Innovation Areas</h4>
+            <ul>
+              <li><a href="#">Sustainable Manufacturing</a></li>
+              <li><a href="#">Renewable Energy</a></li>
+              <li><a href="#">Smart Transportation</a></li>
+              <li><a href="#">Digital Infrastructure</a></li>
+              <li><a href="#">Circular Economy</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-menu-column">
+            <h4>About Us</h4>
+            <ul>
+              <li><a href="../index.html">Home</a></li>
+              <li><a href="about.html">About Us</a></li>
+              <li><a href="projects.html">Projects</a></li>
+              <li><a href="contact.html">Contact</a></li>
+              <li><a href="innovate-now.html">Innovate Now</a></li>
+              <li><a href="invest-now.html">Invest Now</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-menu-column">
+            <h4>Resources</h4>
+            <ul>
+              <li><a href="#">Case Studies</a></li>
+              <li><a href="#">Research Papers</a></li>
+              <li><a href="#">Funding Opportunities</a></li>
+              <li><a href="#">SDG 9 Initiative</a></li>
+              <li><a href="#">Innovation Policy</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-social">
+        <a href="#"><i class="ri-facebook-fill"></i></a>
+        <a href="#"><i class="ri-instagram-line"></i></a>
+        <a href="#"><i class="ri-twitter-fill"></i></a>
+        <a href="#"><i class="ri-linkedin-fill"></i></a>
+        <a href="#"><i class="ri-youtube-fill"></i></a>
+      </div>
+
+      <div class="footer-copyright">
+        <p>Copyright © 2024 Verdant. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+    <script src="../js/form-validation.js"></script>
+  </body>
+</html>

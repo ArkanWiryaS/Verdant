@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../css/common.css" />
+    <link rel="stylesheet" href="../css/invest-now.css" />
+    <title>Verdant | Invest Now</title>
+  </head>
+  <body>
+    <nav>
+      <div class="nav__header">
+        <div class="nav__logo">
+          <a href="../index.html">
+            <img
+              src="../assets/logoVerdantWhite.svg"
+              alt="Verdant Logo"
+              class="logo-img"
+            />
+          </a>
+        </div>
+        <div class="nav__menu__btn" id="menu-btn">
+          <i class="ri-menu-3-line"></i>
+        </div>
+      </div>
+      <ul class="nav__links" id="nav-links">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li>
+          <a href="face-mask-detection.html">AI-Powered Health Monitoring</a>
+        </li>
+        <li><a href="innovate-now.html">Innovate Now</a></li>
+        <li><a href="invest-now.html" class="active">Invest Now</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+
+    <section class="page__header">
+      <div class="header__content">
+        <h1 class="section__header">Invest <span>Now</span></h1>
+        <p class="section__description">
+          Ready to fund impactful solutions? Join our investment ecosystem and
+          support sustainable industrial development. Explore curated
+          opportunities or customize your investment in innovative technologies.
+        </p>
+      </div>
+    </section>
+
+    <section class="section__container benefits__container">
+      <p class="section__subheader">Why Invest With Us</p>
+      <h2 class="section__header">
+        Investment Benefits with <span>Verdant</span>
+      </h2>
+      <div class="benefits__grid">
+        <div class="benefit__card">
+          <span><i class="ri-line-chart-fill"></i></span>
+          <h3>Sustainable Returns</h3>
+          <p>
+            Achieve both financial returns and measurable environmental impact
+            through carefully vetted projects.
+          </p>
+        </div>
+        <div class="benefit__card">
+          <span><i class="ri-shield-check-fill"></i></span>
+          <h3>Risk Management</h3>
+          <p>
+            Benefit from our thorough due diligence process and ongoing
+            monitoring of all funded projects.
+          </p>
+        </div>
+        <div class="benefit__card">
+          <span><i class="ri-hand-coin-fill"></i></span>
+          <h3>Flexible Investment</h3>
+          <p>
+            Choose from various investment sizes and structures to match your
+            portfolio strategy and impact goals.
+          </p>
+        </div>
+        <div class="benefit__card">
+          <span><i class="ri-community-fill"></i></span>
+          <h3>Network Access</h3>
+          <p>
+            Connect with a curated community of like-minded investors, industry
+            experts, and innovative entrepreneurs.
+          </p>
+        </div>
+        <div class="benefit__card">
+          <span><i class="ri-award-fill"></i></span>
+          <h3>Impact Recognition</h3>
+          <p>
+            Receive formal recognition for your contribution to SDG targets and
+            sustainable development in Indonesia.
+          </p>
+        </div>
+        <div class="benefit__card">
+          <span><i class="ri-file-chart-fill"></i></span>
+          <h3>Transparent Reporting</h3>
+          <p>
+            Get detailed quarterly reports on both financial performance and
+            sustainability impact metrics of your investments.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section__container booking__container">
+      <p class="section__subheader">Express Your Interest</p>
+      <h2 class="section__header">Investment <span>Interest Form</span></h2>
+
+      <form id="bookingForm" class="booking__form">
+        <div class="success-message" id="successMessage" style="display: none">
+          <i class="ri-check-line"></i> Your investment interest has been
+          submitted successfully! Our team will contact you soon.
+        </div>
+
+        <div class="form__row">
+          <div class="form__group">
+            <label for="fullName">Full Name*</label>
+            <input
+              type="text"
+              id="fullName"
+              name="fullName"
+              placeholder="Enter your full name"
+              required
+            />
+            <span class="error-message" id="fullNameError"></span>
+          </div>
+
+          <div class="form__group">
+            <label for="email">Email Address*</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              placeholder="Enter your email"
+              required
+            />
+            <span class="error-message" id="emailError"></span>
+          </div>
+        </div>
+
+        <div class="form__row">
+          <div class="form__group">
+            <label for="phone">Phone Number*</label>
+            <input
+              type="tel"
+              id="phone"
+              name="phone"
+              placeholder="Enter your phone number"
+              pattern="[0-9]+"
+              oninput="this.value = this.value.replace(/[^0-9]/g, '')"
+              required
+            />
+            <span class="error-message" id="phoneError"></span>
+          </div>
+
+          <div class="form__group">
+            <label for="organization">Organization/Company*</label>
+            <input
+              type="text"
+              id="organization"
+              name="organization"
+              placeholder="Enter your organization name"
+              required
+            />
+            <span class="error-message" id="organizationError"></span>
+          </div>
+        </div>
+
+        <div class="form__row">
+          <div class="form__group">
+            <label for="investorType">Investor Type*</label>
+            <select id="investorType" name="investorType" required>
+              <option value="">Select investor type</option>
+              <option value="individual">Individual Investor</option>
+              <option value="vc">Venture Capital</option>
+              <option value="pe">Private Equity</option>
+              <option value="corporate">Corporate Investor</option>
+              <option value="impact">Impact Investment Fund</option>
+              <option value="foundation">Foundation</option>
+              <option value="other">Other</option>
+            </select>
+            <span class="error-message" id="investorTypeError"></span>
+          </div>
+
+          <div class="form__group">
+            <label for="interestArea">Primary Interest Area*</label>
+            <select id="interestArea" name="interestArea" required>
+              <option value="">Select interest area</option>
+              <option value="manufacturing">Sustainable Manufacturing</option>
+              <option value="energy">Renewable Energy</option>
+              <option value="transportation">Sustainable Transportation</option>
+              <option value="construction">Green Construction</option>
+              <option value="digital">Digital Infrastructure</option>
+              <option value="water">Water Management</option>
+              <option value="circular">Circular Economy</option>
+              <option value="multiple">Multiple Areas</option>
+            </select>
+            <span class="error-message" id="interestAreaError"></span>
+          </div>
+        </div>
+
+        <div class="form__row">
+          <div class="form__group">
+            <label for="investmentRange">Investment Range (USD)*</label>
+            <select id="investmentRange" name="investmentRange" required>
+              <option value="">Select investment range</option>
+              <option value="under50k">Under $50,000</option>
+              <option value="50k-250k">$50,000 - $250,000</option>
+              <option value="250k-1m">$250,000 - $1 million</option>
+              <option value="1m-5m">$1 million - $5 million</option>
+              <option value="over5m">Over $5 million</option>
+            </select>
+            <span class="error-message" id="investmentRangeError"></span>
+          </div>
+
+          <div class="form__group">
+            <label for="timeframe">Investment Timeframe*</label>
+            <select id="timeframe" name="timeframe" required>
+              <option value="">Select timeframe</option>
+              <option value="immediate">Immediate (0-3 months)</option>
+              <option value="short">Short-term (3-6 months)</option>
+              <option value="medium">Medium-term (6-12 months)</option>
+              <option value="long">Long-term (12+ months)</option>
+            </select>
+            <span class="error-message" id="timeframeError"></span>
+          </div>
+        </div>
+
+        <div class="form__row">
+          <div class="form__group full-width">
+            <label for="investmentGoals">Investment Goals & Preferences*</label>
+            <textarea
+              id="investmentGoals"
+              name="investmentGoals"
+              rows="4"
+              placeholder="Describe your investment goals, expected returns, impact priorities, and any specific project types you're interested in"
+              required
+            ></textarea>
+            <span class="error-message" id="investmentGoalsError"></span>
+          </div>
+        </div>
+
+        <div class="form__row">
+          <div class="form__group full-width">
+            <label for="additionalInfo">Additional Information</label>
+            <textarea
+              id="additionalInfo"
+              name="additionalInfo"
+              rows="4"
+              placeholder="Any other relevant information about your investment interests or requirements"
+            ></textarea>
+            <span class="error-message" id="additionalInfoError"></span>
+          </div>
+        </div>
+
+        <div class="form__row">
+          <div class="form__group checkbox-group">
+            <input
+              type="checkbox"
+              id="termsConditions"
+              name="termsConditions"
+              required
+            />
+            <label for="termsConditions"
+              >I agree to the Terms and Conditions*</label
+            >
+            <span class="error-message" id="termsConditionsError"></span>
+          </div>
+        </div>
+
+        <button type="submit" class="btn booking-btn">Submit Interest</button>
+      </form>
+    </section>
+
+    <section class="section__container investment-process">
+      <p class="section__subheader">What Happens Next</p>
+      <h2 class="section__header">Our <span>Investment Process</span></h2>
+
+      <div class="process-timeline">
+        <div class="process-step">
+          <div class="process-step-content">
+            <h3>Initial Consultation</h3>
+            <p>
+              Our investment team connects with you to understand your goals,
+              preferences, and requirements (1-2 weeks).
+            </p>
+          </div>
+        </div>
+
+        <div class="process-step">
+          <div class="process-step-content">
+            <h3>Portfolio Matching</h3>
+            <p>
+              We identify and present investment opportunities matching your
+              criteria and impact goals.
+            </p>
+          </div>
+        </div>
+
+        <div class="process-step">
+          <div class="process-step-content">
+            <h3>Due Diligence Access</h3>
+            <p>
+              Review our comprehensive due diligence materials on selected
+              projects including financial models, impact assessments, and risk
+              analyses.
+            </p>
+          </div>
+        </div>
+
+        <div class="process-step">
+          <div class="process-step-content">
+            <h3>Investment Agreement</h3>
+            <p>
+              Formalization of investment terms, conditions, reporting
+              requirements, and timeline.
+            </p>
+          </div>
+        </div>
+
+        <div class="process-step">
+          <div class="process-step-content">
+            <h3>Ongoing Management</h3>
+            <p>
+              Regular reporting on financial performance and impact metrics with
+              quarterly investor briefings.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer-blue-gradient">
+      <div class="footer-container">
+        <div class="footer-column">
+          <div class="footer-logo">
+            <a href="index.html">
+              <img
+                src="../assets/logoVerdantWhite.svg"
+                alt="Verdant Logo"
+                class="logo-img"
+              />
+            </a>
+          </div>
+          <p class="footer-tagline">
+            Building sustainable industries since 2020
+          </p>
+        </div>
+
+        <div class="footer-menu-columns">
+          <div class="footer-menu-column">
+            <h4>Innovation Areas</h4>
+            <ul>
+              <li><a href="#">Sustainable Manufacturing</a></li>
+              <li><a href="#">Renewable Energy</a></li>
+              <li><a href="#">Smart Transportation</a></li>
+              <li><a href="#">Digital Infrastructure</a></li>
+              <li><a href="#">Circular Economy</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-menu-column">
+            <h4>About Us</h4>
+            <ul>
+              <li><a href="../index.html">Home</a></li>
+              <li><a href="about.html">About Us</a></li>
+              <li><a href="projects.html">Projects</a></li>
+              <li><a href="contact.html">Contact</a></li>
+              <li><a href="innovate-now.html">Innovate Now</a></li>
+              <li><a href="invest-now.html">Invest Now</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-menu-column">
+            <h4>Resources</h4>
+            <ul>
+              <li><a href="#">Case Studies</a></li>
+              <li><a href="#">Research Papers</a></li>
+              <li><a href="#">Funding Opportunities</a></li>
+              <li><a href="#">SDG 9 Initiative</a></li>
+              <li><a href="#">Innovation Policy</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-social">
+        <a href="#"><i class="ri-facebook-fill"></i></a>
+        <a href="#"><i class="ri-instagram-line"></i></a>
+        <a href="#"><i class="ri-twitter-fill"></i></a>
+        <a href="#"><i class="ri-linkedin-fill"></i></a>
+        <a href="#"><i class="ri-youtube-fill"></i></a>
+      </div>
+
+      <div class="footer-copyright">
+        <p>Copyright © 2024 Verdant. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+    <script src="../js/invest-form-validation.js"></script>
+  </body>
+</html>

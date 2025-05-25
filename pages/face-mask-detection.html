@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../css/common.css" />
+    <link rel="stylesheet" href="../css/face-mask-detection.css" />
+
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.10.0/dist/tf.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/blazeface@0.0.7/dist/blazeface.js"></script>
+
+    <title>Verdant | Face Mask Detection</title>
+  </head>
+  <body>
+    <nav>
+      <div class="nav__header">
+        <div class="nav__logo">
+          <a href="../index.html">
+            <img
+              src="../assets/logoVerdantWhite.svg"
+              alt="Verdant Logo"
+              class="logo-img"
+            />
+          </a>
+        </div>
+        <div class="nav__menu__btn" id="menu-btn">
+          <i class="ri-menu-3-line"></i>
+        </div>
+      </div>
+      <ul class="nav__links" id="nav-links">
+        <li>
+          <a href="../index.html"></i> Home</a>
+        </li>
+        <li>
+          <a href="projects.html"> Projects</a>
+        </li>
+        <li>
+          <a href="about.html"> About Us</a>
+        </li>
+        
+        <li>
+          <a href="face-mask-detection.html" class="active"
+            > AI-Powered Health Monitoring</a
+          >
+        </li>
+        <li>
+          <a href="innovate-now.html"
+            > Innovate Now</a
+          >
+        </li>
+        <li>
+          <a href="invest-now.html">Invest Now</a>
+        </li>
+        <li>
+          <a href="contact.html"></i> Contact</a>
+        </li>
+      </ul>
+    </nav>
+
+    <section class="page__header">
+      <div class="header__content">
+        <h1 class="section__header">
+          AI-Powered Health<span> Monitoring</span>
+        </h1>
+        <p class="section__description">
+          As part of Verdant's smart infrastructure initiative, we developed
+          this AI-powered face mask detection system to help businesses and
+          public facilities maintain health and safety standards. This
+          browser-based solution represents our commitment to innovative,
+          privacy-first technology for sustainable workplace management.
+        </p>
+      </div>
+    </section>
+
+    <section class="section__container detection__container">
+      <p class="section__subheader">Live Demo</p>
+      <h2 class="section__header">
+        Try Our <span>Browser-Based Detector</span>
+      </h2>
+
+      <div class="detection__options">
+        <div class="option__tabs">
+          <button class="option__tab active" id="webcamTab">
+            <i class="ri-webcam-line"></i>
+            Webcam Detection
+          </button>
+          <button class="option__tab" id="uploadTab">
+            <i class="ri-upload-line"></i>
+            Upload Image
+          </button>
+        </div>
+
+        <div class="detection__content">
+          <div class="model-status" id="modelStatus">
+            <div class="status-card">
+              <div class="status-icon">
+                <i class="ri-brain-line"></i>
+              </div>
+              <div class="status-content">
+                <h3>AI Model Status</h3>
+                <p id="statusText">Initializing TensorFlow.js...</p>
+                <div class="progress-bar">
+                  <div class="progress-fill" id="progressFill"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="detection__panel active" id="webcamPanel">
+            <div class="webcam__container">
+              <video id="webcam" autoplay playsinline muted></video>
+              <canvas id="webcamCanvas"></canvas>
+              <div
+                class="loading-indicator"
+                id="webcamLoading"
+                style="display: none"
+              >
+                <div class="spinner"></div>
+                <p>Starting camera...</p>
+              </div>
+            </div>
+
+            <div class="webcam__controls">
+              <button id="startWebcam" class="btn" disabled>
+                <i class="ri-play-line"></i>
+                Start Camera
+              </button>
+              <button id="stopWebcam" class="btn btn-secondary" disabled>
+                <i class="ri-stop-line"></i>
+                Stop Camera
+              </button>
+              <button id="capturePhoto" class="btn btn-secondary" disabled>
+                <i class="ri-camera-line"></i>
+                Capture Photo
+              </button>
+            </div>
+
+            <div id="webcamResult" class="result__container">
+              <h3><i class="ri-scan-line"></i> Detection Results</h3>
+              <div class="result__content">
+                <p>Click "Start Camera" to begin face mask detection.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="detection__panel" id="uploadPanel">
+            <div class="upload__container">
+              <div class="upload__dropzone" id="uploadDropzone">
+                <i class="ri-upload-cloud-2-line"></i>
+                <p>Drag and drop an image here or</p>
+                <label for="fileInput" class="btn">
+                  <i class="ri-folder-line"></i>
+                  Choose File
+                </label>
+                <input type="file" id="fileInput" accept="image/*" hidden />
+                <p class="file-info">Supports: JPG, PNG, WEBP (Max: 10MB)</p>
+              </div>
+
+              <div
+                class="upload__preview"
+                id="uploadPreview"
+                style="display: none"
+              >
+                <img id="previewImage" src="" alt="Preview" />
+                <canvas id="uploadCanvas"></canvas>
+                <div
+                  class="loading-indicator"
+                  id="uploadLoading"
+                  style="display: none"
+                >
+                  <div class="spinner"></div>
+                  <p>Analyzing image...</p>
+                </div>
+              </div>
+            </div>
+
+            <div id="uploadResult" class="result__container">
+              <h3><i class="ri-image-line"></i> Detection Results</h3>
+              <div class="result__content">
+                <p>Upload an image to detect face masks.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section__container features-section">
+      <p class="section__subheader">Key Features</p>
+      <h2 class="section__header">
+        Why Choose Our <span>Browser-Based System</span>
+      </h2>
+
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="ri-speed-line"></i>
+          </div>
+          <h3>Real-time Processing</h3>
+          <p>
+            Lightning-fast detection with WebGL acceleration, capable of
+            processing 30+ FPS for smooth real-time analysis.
+          </p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="ri-wifi-off-line"></i>
+          </div>
+          <h3>Works Offline</h3>
+          <p>
+            Once loaded, the system works completely offline. No internet
+            connection required for detection after initial model download.
+          </p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="ri-smartphone-line"></i>
+          </div>
+          <h3>Cross-Platform</h3>
+          <p>
+            Works seamlessly on desktop, tablet, and mobile devices. No
+            installation required - just open in any modern browser.
+          </p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="ri-shield-check-line"></i>
+          </div>
+          <h3>Privacy Focused</h3>
+          <p>
+            Zero data collection. All processing happens in your browser. Images
+            never leave your device or get stored anywhere.
+          </p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="ri-cpu-line"></i>
+          </div>
+          <h3>Hardware Accelerated</h3>
+          <p>
+            Leverages WebGL and GPU acceleration for optimal performance,
+            ensuring smooth operation even on lower-end devices.
+          </p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="ri-open-source-line"></i>
+          </div>
+          <h3>Open Source</h3>
+          <p>
+            Built with open-source technologies including TensorFlow.js and
+            MediaPipe, ensuring transparency and reliability.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section__container use-cases">
+      <p class="section__subheader">Applications</p>
+      <h2 class="section__header">Real-World <span>Use Cases</span></h2>
+
+      <div class="use-case-grid">
+        <div class="use-case-card">
+          <div
+            class="placeholder-image"
+            data-placeholder="Public Transportation"
+          >
+            <i class="ri-bus-line"></i>
+            <span>Public Transportation</span>
+          </div>
+          <h3>Public Transportation</h3>
+          <p>
+            Ensuring mask compliance on buses, trains, and in stations to
+            protect passengers and staff during travel.
+          </p>
+        </div>
+
+        <div class="use-case-card">
+          <div
+            class="placeholder-image"
+            data-placeholder="Healthcare Facilities"
+          >
+            <i class="ri-hospital-line"></i>
+            <span>Healthcare Facilities</span>
+          </div>
+          <h3>Healthcare Facilities</h3>
+          <p>
+            Monitoring mask usage in waiting rooms and public areas of hospitals
+            and clinics to maintain health standards.
+          </p>
+        </div>
+
+        <div class="use-case-card">
+          <div class="placeholder-image" data-placeholder="Retail Environments">
+            <i class="ri-store-2-line"></i>
+            <span>Retail Environments</span>
+          </div>
+          <h3>Retail Environments</h3>
+          <p>
+            Helping stores maintain health regulations and ensure customer
+            safety during shopping experiences.
+          </p>
+        </div>
+
+        <div class="use-case-card">
+          <div class="placeholder-image" data-placeholder="Workplaces">
+            <i class="ri-building-line"></i>
+            <span>Workplaces</span>
+          </div>
+          <h3>Workplaces</h3>
+          <p>
+            Supporting companies in maintaining health protocols and creating
+            safer work environments for employees.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer-blue-gradient">
+      <div class="footer-container">
+        <div class="footer-column">
+          <div class="footer-logo">
+            <a href="index.html">
+              <img src="../assets/logoVerdantWhite.svg" alt="Verdant Logo" class="logo-img">
+            </a>
+          </div>
+          <p class="footer-tagline">
+            Building sustainable industries since 2020
+          </p>
+        </div>
+
+        <div class="footer-menu-columns">
+          <div class="footer-menu-column">
+            <h4>Innovation Areas</h4>
+            <ul>
+              <li><a href="#">Sustainable Manufacturing</a></li>
+              <li><a href="#">Renewable Energy</a></li>
+              <li><a href="#">Smart Transportation</a></li>
+              <li><a href="#">Digital Infrastructure</a></li>
+              <li><a href="#">Circular Economy</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-menu-column">
+            <h4>About Us</h4>
+            <ul>
+              <li><a href="../index.html">Home</a></li>
+              <li><a href="about.html">About Us</a></li>
+              <li><a href="projects.html">Projects</a></li>
+              <li><a href="contact.html">Contact</a></li>
+              <li>
+                <a href="face-mask-detection.html"
+                  >AI-Powered Health Monitoring</a
+                >
+              </li>
+              <li><a href="innovate-now.html">Innovate Now</a></li>
+              <li><a href="invest-now.html">Invest Now</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-menu-column">
+            <h4>Resources</h4>
+            <ul>
+              <li><a href="#">Case Studies</a></li>
+              <li><a href="#">Research Papers</a></li>
+              <li><a href="#">Funding Opportunities</a></li>
+              <li><a href="#">SDG 9 Initiative</a></li>
+              <li><a href="#">Innovation Policy</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-social">
+        <a href="#"><i class="ri-facebook-fill"></i></a>
+        <a href="#"><i class="ri-instagram-line"></i></a>
+        <a href="#"><i class="ri-twitter-fill"></i></a>
+        <a href="#"><i class="ri-linkedin-fill"></i></a>
+        <a href="#"><i class="ri-youtube-fill"></i></a>
+      </div>
+
+      <div class="footer-copyright">
+        <p>Copyright © 2024 Verdant. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+    <script src="../js/face-mask-detection-browser.js"></script>
+  </body>
+</html>

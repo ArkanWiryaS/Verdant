@@ -1,0 +1,349 @@
+/* Hero Header */
+.page__header {
+  position: relative;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-top: 0;
+  padding-bottom: 0;
+  background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
+    url("../assets/heroProject.jpg");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  overflow: hidden;
+  margin-bottom: 2rem;
+}
+#impact {
+  text-align: center;
+}
+.page__header::before,
+.page__header::after {
+  display: none;
+}
+
+.header__content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.header__content .hero__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background-color: rgba(255, 255, 255, 0.2);
+  color: var(--white);
+  font-weight: 600;
+  border-radius: 2rem;
+  margin-bottom: 1.5rem;
+  max-width: max-content;
+  backdrop-filter: blur(5px);
+}
+
+.header__content .hero__badge i {
+  color: var(--white);
+  font-size: 1.25rem;
+}
+
+.page__header .section__header {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 800;
+  line-height: 1.2;
+  color: var(--white);
+  margin-bottom: 1.5rem;
+  text-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  text-align: center;
+  white-space: nowrap;
+}
+
+.page__header .section__header span {
+  color: var(--extra-light);
+  position: relative;
+}
+
+.page__header .section__header span::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -5px;
+  width: 100%;
+  height: 4px;
+  background-color: var(--primary-color);
+  border-radius: 2px;
+  opacity: 0.8;
+}
+
+.page__header .section__description {
+  max-width: 700px;
+  color: var(--white);
+  line-height: 1.8;
+  font-size: 1.1rem;
+  margin-bottom: 1.5rem;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  text-align: center;
+}
+
+/* Destinations Container */
+.destinations__container {
+  padding-bottom: 5rem;
+}
+
+.destinations__container .section__header {
+  margin-bottom: 2.5rem;
+}
+
+.destinations__grid {
+  display: grid;
+  gap: 2.5rem;
+  margin-top: 1.5rem;
+}
+
+.destination__card {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--white);
+  border-radius: 1.25rem;
+  overflow: hidden;
+  box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s, box-shadow 0.3s;
+  height: 100%;
+}
+
+.destination__card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.12);
+}
+
+.destination__card .image-container {
+  position: relative;
+  width: 100%;
+  padding-top: 100%; /* Creates a 1:1 aspect ratio */
+  overflow: hidden;
+}
+
+.destination__card img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s;
+}
+
+.destination__card:hover img {
+  transform: scale(1.05);
+}
+
+.destination__content {
+  padding: 1.75rem;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  background-color: var(--white);
+}
+
+.destination__content h3 {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin-bottom: 0.3rem;
+}
+
+.destination__content .province {
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--primary-color);
+  margin-bottom: 1.25rem;
+  display: inline-block;
+}
+
+.destination__content .description {
+  color: var(--text-light);
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+  flex: 1;
+}
+
+.destination__info {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+  background-color: var(--extra-light);
+  padding: 0.75rem 1rem;
+  border-radius: 0.75rem;
+}
+
+.destination__info div {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--text-dark);
+  font-weight: 500;
+}
+
+.destination__info div span {
+  color: var(--primary-color);
+  font-size: 1.2rem;
+}
+
+.destination__content .btn {
+  width: 100%;
+  text-align: center;
+  padding: 1rem;
+  border-radius: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+}
+
+.destination__content .btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(30, 136, 229, 0.3);
+}
+
+/* Media Queries */
+@media (width > 768px) {
+  .header__content {
+    max-width: 800px;
+  }
+}
+
+@media (max-width: 768px) {
+  .page__header {
+    height: 450px;
+    padding-top: 8rem;
+    padding-bottom: 0;
+    background-attachment: scroll; /* Untuk mobile */
+  }
+
+  .page__header .section__header {
+    font-size: 2.5rem;
+    white-space: normal; /* Memungkinkan teks untuk wrapping di mobile */
+  }
+
+  .page__header .section__description {
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+}
+
+@media (max-width: 480px) {
+  .page__header {
+    height: 100vh;
+    padding-top: 7rem;
+    padding-bottom: 0;
+  }
+
+  .page__header .section__header {
+    font-size: 2rem;
+  }
+
+  .header__content {
+    padding: 0 1rem;
+  }
+
+  .page__header .section__header span::after {
+    height: 3px;
+    bottom: -3px;
+  }
+
+  .destination__info {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .destination__content {
+    padding: 1.25rem;
+  }
+
+  .destination__content h3 {
+    font-size: 1.5rem;
+  }
+}
+
+@media (width > 768px) {
+  .destinations__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (width > 1024px) {
+  .destinations__grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Impact Section Styles */
+.impact-section {
+  padding: 5rem 0;
+  margin-top: 3rem;
+}
+
+.impact-stats {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 2rem;
+  margin: 3rem 0;
+}
+
+.impact-stat {
+  flex: 1;
+  min-width: 200px;
+  text-align: center;
+  padding: 1.5rem;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+}
+
+.stat-number {
+  font-size: 3rem;
+  font-weight: 700;
+  color: var(--primary-color);
+  margin-bottom: 0.5rem;
+  line-height: 1;
+}
+
+.stat-label {
+  font-size: 1.1rem;
+  color: var(--dark-color);
+}
+
+.impact-description {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.impact-description p {
+  margin-bottom: 2rem;
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+@media screen and (max-width: 768px) {
+  .impact-stats {
+    justify-content: center;
+  }
+
+  .impact-stat {
+    flex: 0 0 calc(50% - 1rem);
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .impact-stat {
+    flex: 0 0 100%;
+  }
+}

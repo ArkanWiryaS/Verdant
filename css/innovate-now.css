@@ -1,0 +1,411 @@
+/* Benefits */
+.benefits__container {
+  padding-bottom: 3rem;
+}
+
+.benefits__grid {
+  display: grid;
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+.benefit__card {
+  padding: 2rem;
+  text-align: center;
+  background-color: var(--extra-light);
+  border-radius: 1.5rem;
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s, background-color 0.3s, border-radius 0.3s;
+}
+
+.benefit__card:hover {
+  transform: translateY(-10px);
+  background-color: white;
+  border-radius: 20px;
+}
+
+.benefit__card span {
+  display: inline-block;
+  font-size: 3rem;
+  color: var(--primary-color);
+  margin-bottom: 1.5rem;
+  transition: color 0.3s;
+}
+
+.benefit__card h3 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--text-dark);
+  margin-bottom: 1rem;
+  transition: color 0.3s;
+}
+
+.benefit__card p {
+  color: var(--text-light);
+  line-height: 1.6;
+  transition: color 0.3s;
+}
+
+.benefit__card:hover span,
+.benefit__card:hover h3,
+.benefit__card:hover p {
+  color: var(--primary-color);
+}
+
+/* Booking Form */
+.booking__container {
+  padding-bottom: 5rem;
+}
+
+.booking__form {
+  max-width: 900px;
+  margin: 3rem auto 0;
+  padding: 2.5rem;
+  background-color: var(--white);
+  border-radius: 1.5rem;
+  box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.form__row {
+  display: grid;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.form__group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form__group label {
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--text-dark);
+}
+
+.form__group input,
+.form__group select,
+.form__group textarea {
+  padding: 0.75rem 1rem;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  color: var(--text-dark);
+  outline: none;
+  transition: border-color 0.3s;
+}
+
+.form__group input:focus,
+.form__group select:focus,
+.form__group textarea:focus {
+  border-color: var(--primary-color);
+}
+
+.form__group.full-width {
+  grid-column: 1 / -1;
+}
+
+.form__group.checkbox-group {
+  flex-direction: row;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.error-message {
+  color: #e53935;
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
+  font-weight: 500;
+  display: none;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.form__group input.error,
+.form__group select.error,
+.form__group textarea.error {
+  border-color: #e53935;
+  background-color: rgba(229, 57, 53, 0.05);
+}
+
+.booking-btn {
+  padding: 1rem 2.5rem;
+  font-size: 1.1rem;
+  margin-top: 1rem;
+  width: 100%;
+}
+
+/* Innovation Process Section */
+.innovation-process {
+  padding: 5rem 0;
+}
+
+.process-timeline {
+  max-width: 1000px;
+  margin: 4rem auto 0;
+  position: relative;
+}
+
+.process-timeline::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 4px;
+  height: 100%;
+  background: linear-gradient(
+    to bottom,
+    var(--primary-color),
+    var(--secondary-color)
+  );
+  border-radius: 2px;
+}
+
+.process-step {
+  display: flex;
+  gap: 2rem;
+  margin-bottom: 3.5rem;
+  position: relative;
+  padding-left: 2rem;
+}
+
+.process-step:last-child {
+  margin-bottom: 0;
+}
+
+.process-step::before {
+  content: "";
+  position: absolute;
+  left: -8px;
+  top: 0;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: linear-gradient(
+    135deg,
+    var(--primary-color),
+    var(--secondary-color)
+  );
+  box-shadow: 0 0 0 4px rgba(8, 97, 105, 0.1);
+  z-index: 1;
+}
+
+.process-step-content {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  flex: 1;
+  transition: transform 0.3s ease;
+}
+
+.process-step-content:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+}
+
+.process-step-content h3 {
+  color: var(--primary-color);
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  font-weight: 700;
+}
+
+.process-step-content p {
+  color: var(--text-color);
+  line-height: 1.7;
+}
+
+/* Hero Header */
+.page__header {
+  position: relative;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-top: 0;
+  padding-bottom: 0;
+  background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
+    url("../assets/heroInnovate.jpg");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  overflow: hidden;
+  margin-bottom: 2rem;
+}
+
+.page__header::before,
+.page__header::after {
+  display: none;
+}
+
+.header__content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.header__content .hero__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background-color: rgba(255, 255, 255, 0.2);
+  color: var(--white);
+  font-weight: 600;
+  border-radius: 2rem;
+  margin-bottom: 1.5rem;
+  max-width: max-content;
+  backdrop-filter: blur(5px);
+}
+
+.header__content .hero__badge i {
+  color: var(--white);
+  font-size: 1.25rem;
+}
+
+.page__header .section__header {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 800;
+  line-height: 1.2;
+  color: var(--white);
+  margin-bottom: 1.5rem;
+  text-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  text-align: center;
+}
+
+.page__header .section__header span {
+  color: var(--extra-light);
+  position: relative;
+}
+
+.page__header .section__header span::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -5px;
+  width: 100%;
+  height: 4px;
+  background-color: var(--primary-color);
+  border-radius: 2px;
+  opacity: 0.8;
+}
+
+.page__header .section__description {
+  max-width: 700px;
+  color: var(--white);
+  line-height: 1.8;
+  font-size: 1.1rem;
+  margin-bottom: 1.5rem;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  text-align: center;
+}
+
+/* Responsive Styles */
+@media (width > 540px) {
+  .benefits__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (width > 768px) {
+  .form__row {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .benefits__grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .booking-btn {
+    width: auto;
+    margin-inline: auto;
+  }
+
+  .header__content {
+    max-width: 800px;
+  }
+}
+
+@media (width > 1024px) {
+  .benefits__grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .page__header {
+    height: 450px;
+    padding-top: 8rem;
+    padding-bottom: 0;
+    background-attachment: scroll;
+  }
+
+  .page__header .section__header {
+    font-size: 2.5rem;
+    white-space: normal;
+  }
+
+  .page__header .section__description {
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+
+  .process-timeline::before {
+    left: 20px;
+  }
+
+  .process-step {
+    padding-left: 50px;
+  }
+
+  .process-step::before {
+    left: 12px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .page__header {
+    height: 100vh;
+    padding-top: 7rem;
+    padding-bottom: 0;
+  }
+
+  .page__header .section__header {
+    font-size: 2rem;
+  }
+
+  .header__content {
+    padding: 0 1rem;
+  }
+
+  .page__header .section__header span::after {
+    height: 3px;
+    bottom: -3px;
+  }
+
+  .process-step-content {
+    padding: 1.5rem;
+  }
+
+  .process-step-content h3 {
+    font-size: 1.3rem;
+  }
+}
