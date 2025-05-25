@@ -4,7 +4,7 @@ module.exports = {
       name: "verdant-website",
       script: "python3",
       args: "-m http.server 3000",
-      cwd: "/",
+      cwd: "/home/swarakita/Verdant",
       instances: 1,
       autorestart: true,
       watch: false,
