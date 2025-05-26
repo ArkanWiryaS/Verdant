@@ -640,6 +640,23 @@ Mobile responsiveness for AI navbar
   transform: translateY(-5px);
 }
 
+.use-case-image {
+  width: 100%;
+  aspect-ratio: 16/9;
+  overflow: hidden;
+}
+
+.use-case-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.use-case-card:hover .use-case-image img {
+  transform: scale(1.05);
+}
+
 .use-case-card img {
   width: 100%;
   aspect-ratio: 16/9;
@@ -706,14 +723,6 @@ Mobile responsiveness for AI navbar
   .process-cards,
   .use-case-grid {
     grid-template-columns: 1fr;
-  }
-
-  .placeholder-image i {
-    font-size: 2.5rem;
-  }
-
-  .placeholder-image span {
-    font-size: 0.8rem;
   }
 }
 
