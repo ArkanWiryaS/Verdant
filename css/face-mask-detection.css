@@ -434,9 +434,9 @@ Mobile responsiveness for AI navbar
 }
 
 .webcam__controls {
-  margin-top: 2rem;
+  margin-top: 1.5rem;
   display: flex;
-  justify-content:center;
+  justify-content: center;
   gap: 1rem;
 }
 
@@ -638,6 +638,7 @@ Mobile responsiveness for AI navbar
 
 .use-case-card:hover {
   transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
 }
 
 .use-case-image {
@@ -657,51 +658,19 @@ Mobile responsiveness for AI navbar
   transform: scale(1.05);
 }
 
-.use-case-card img {
-  width: 100%;
-  aspect-ratio: 16/9;
-  object-fit: cover;
-}
-
 .use-case-card h3 {
   padding: 1.5rem 1.5rem 0.5rem;
   color: var(--dark-color);
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin: 0;
 }
 
 .use-case-card p {
   padding: 0 1.5rem 1.5rem;
   color: #6c757d;
-}
-
-/* Placeholder Image Styles */
-.placeholder-image {
-  width: 100%;
-  aspect-ratio: 16/9;
-  background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  color: #64748b;
-  border: 2px dashed #cbd5e1;
-  transition: all 0.3s ease;
-}
-
-.placeholder-image:hover {
-  background: linear-gradient(135deg, #e2e8f0 0%, #cbd5e1 100%);
-  color: #475569;
-}
-
-.placeholder-image i {
-  font-size: 3rem;
-  margin-bottom: 0.5rem;
-  opacity: 0.7;
-}
-
-.placeholder-image span {
-  font-size: 0.9rem;
-  font-weight: 500;
-  text-align: center;
+  line-height: 1.6;
+  margin: 0;
 }
 
 /* Responsive Adjustments */
