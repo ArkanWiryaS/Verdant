@@ -53,8 +53,6 @@ async function initializeModels() {
     faceDetectionModel = await blazeface.load();
     updateStatus("Face detection model loaded!", 80);
 
-    // For demonstration, we'll use a simple heuristic for mask detection
-    // In a real scenario, you would load a custom trained model here
     updateStatus("Initializing mask classification...", 90);
     await simulateModelLoading();
     maskClassificationModel = createSimpleMaskClassifier();
@@ -82,16 +80,13 @@ function updateStatus(message, progress) {
   }
 }
 
-// Simulate model loading delay
 function simulateModelLoading() {
   return new Promise((resolve) => setTimeout(resolve, 500));
 }
 
-// Create improved mask classifier with multiple features
 function createSimpleMaskClassifier() {
   return {
     predict: function (faceRegion) {
-      // Balanced mask detection algorithm - accurate but not extreme
       const canvas = document.createElement("canvas");
       const ctx = canvas.getContext("2d");
       canvas.width = faceRegion.width;
@@ -855,7 +850,7 @@ function updateResult(container, message, type = "info") {
     `;
 }
 
-// Add CSS for results styling
+
 const resultStyles = `
 <style>
 .model-status {
