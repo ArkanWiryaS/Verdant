@@ -16,7 +16,6 @@ navLinks.addEventListener("click", (e) => {
   menuBtnIcon.setAttribute("class", "ri-menu-3-line");
 });
 
-// Custom Carousel
 document.addEventListener("DOMContentLoaded", function () {
   const carouselContainer = document.querySelector(".carousel__container");
   const destinationCards = document.querySelectorAll(".destination__card");
@@ -79,7 +78,6 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
-// Hide and show navigation on scroll
 const nav = document.querySelector("nav");
 let lastScrollTop = 0;
 

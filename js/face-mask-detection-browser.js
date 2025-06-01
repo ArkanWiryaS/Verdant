@@ -1,5 +1,3 @@
-// Face Mask Detection - Browser-based with TensorFlow.js
-
 // Global variables
 let faceDetectionModel = null;
 let maskClassificationModel = null;
@@ -7,7 +5,6 @@ let webcamStream = null;
 let isWebcamActive = false;
 let detectionInterval = null;
 
-// DOM Elements
 const webcamTab = document.getElementById("webcamTab");
 const uploadTab = document.getElementById("uploadTab");
 const webcamPanel = document.getElementById("webcamPanel");
@@ -32,23 +29,19 @@ const uploadCanvas = document.getElementById("uploadCanvas");
 const uploadLoading = document.getElementById("uploadLoading");
 const uploadResult = document.getElementById("uploadResult");
 
-// Initialize when page loads
 document.addEventListener("DOMContentLoaded", async function () {
   await initializeModels();
   setupEventListeners();
   setupTabSwitching();
 });
 
-// Initialize AI models
 async function initializeModels() {
   try {
     updateStatus("Loading TensorFlow.js...", 20);
 
-    // Wait for TensorFlow.js to be ready
     await tf.ready();
     updateStatus("TensorFlow.js loaded successfully!", 40);
 
-    // Load face detection model (BlazeFace)
     updateStatus("Loading face detection model...", 60);
     faceDetectionModel = await blazeface.load();
     updateStatus("Face detection model loaded!", 80);
@@ -59,7 +52,6 @@ async function initializeModels() {
 
     updateStatus("All models loaded successfully!", 100);
 
-    // Enable controls after 1 second
     setTimeout(() => {
       modelStatus.style.display = "none";
       enableControls();
@@ -70,7 +62,6 @@ async function initializeModels() {
   }
 }
 
-// Update loading status
 function updateStatus(message, progress) {
   statusText.textContent = message;
   progressFill.style.width = progress + "%";
@@ -95,21 +86,17 @@ function createSimpleMaskClassifier() {
       ctx.drawImage(faceRegion, 0, 0);
       const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
 
-      // Define regions for analysis
       const faceHeight = canvas.height;
       const faceWidth = canvas.width;
 
-      // Mouth/mask region - balanced coverage
       const mouthY1 = Math.floor(faceHeight * 0.6);
       const mouthY2 = Math.floor(faceHeight * 0.9);
       const mouthWidth = Math.floor(faceWidth * 0.8); // Wider coverage
       const mouthX1 = Math.floor(faceWidth * 0.1);
 
-      // Nose region for comparison
       const noseY1 = Math.floor(faceHeight * 0.4);
       const noseY2 = Math.floor(faceHeight * 0.65);
 
-      // Feature 1: Mask color coverage (primary indicator)
       const maskColorCoverage = detectMaskColorCoverage(
         imageData,
         mouthX1,
@@ -118,7 +105,6 @@ function createSimpleMaskClassifier() {
         mouthY2 - mouthY1
       );
 
-      // Feature 2: Mouth/lip concealment (smart detection)
       const mouthConcealment = detectMouthConcealment(
         imageData,
         mouthX1,
@@ -127,7 +113,6 @@ function createSimpleMaskClassifier() {
         mouthY2 - mouthY1
       );
 
-      // Feature 3: Color uniformity vs skin texture
       const colorUniformity = analyzeColorUniformity(
         imageData,
         mouthX1,
@@ -136,7 +121,6 @@ function createSimpleMaskClassifier() {
         mouthY2 - mouthY1
       );
 
-      // Feature 4: Edge patterns (mask vs natural face)
       const maskEdgeSignature = analyzeMaskEdges(
         imageData,
         mouthX1,
@@ -145,7 +129,6 @@ function createSimpleMaskClassifier() {
         mouthY2 - mouthY1
       );
 
-      // Feature 5: Brightness contrast (mask creates different lighting)
       const brightnessContrast = analyzeBrightnessContrast(
         imageData,
         mouthX1,
@@ -156,89 +139,81 @@ function createSimpleMaskClassifier() {
         mouthY2 - mouthY1
       );
 
-      // BALANCED scoring system
       let maskScore = 0;
 
-      // 1. Mask color coverage (HIGH WEIGHT - most reliable)
       if (maskColorCoverage > 0.6) {
-        maskScore += 40; // Strong mask color presence
+        maskScore += 40;
         console.log("STRONG: Mask colors detected +40");
       } else if (maskColorCoverage > 0.4) {
-        maskScore += 25; // Good mask colors
+        maskScore += 25;
         console.log("GOOD: Some mask colors +25");
       } else if (maskColorCoverage > 0.2) {
-        maskScore += 10; // Slight mask colors
+        maskScore += 10;
         console.log("SLIGHT: Few mask colors +10");
       } else {
-        maskScore -= 15; // No mask colors
+        maskScore -= 15;
         console.log("PENALTY: No mask colors -15");
       }
 
-      // 2. Mouth concealment (CRITICAL - but balanced)
       if (mouthConcealment > 0.7) {
-        maskScore += 30; // Mouth well concealed
+        maskScore += 30;
         console.log("BONUS: Mouth well concealed +30");
       } else if (mouthConcealment > 0.5) {
-        maskScore += 20; // Mouth mostly concealed
+        maskScore += 20;
         console.log("BONUS: Mouth mostly concealed +20");
       } else if (mouthConcealment > 0.3) {
-        maskScore += 5; // Mouth partially concealed
+        maskScore += 5;
         console.log("SMALL: Mouth partially concealed +5");
       } else if (mouthConcealment < 0.2) {
-        maskScore -= 25; // Mouth clearly visible
+        maskScore -= 25;
         console.log("PENALTY: Mouth clearly visible -25");
       }
 
-      // 3. Color uniformity (supporting evidence)
       if (colorUniformity > 0.8) {
-        maskScore += 20; // Very uniform (manufactured)
+        maskScore += 20;
         console.log("BONUS: Very uniform surface +20");
       } else if (colorUniformity > 0.6) {
-        maskScore += 12; // Uniform
+        maskScore += 12;
         console.log("BONUS: Uniform surface +12");
       } else if (colorUniformity < 0.3) {
-        maskScore -= 5; // Very varied (natural skin)
+        maskScore -= 5;
         console.log("SLIGHT: Natural skin texture -5");
       }
 
-      // 4. Mask edge signature
       if (maskEdgeSignature > 0.6) {
-        maskScore += 15; // Clear mask edges
+        maskScore += 15;
         console.log("BONUS: Clear mask edges +15");
       } else if (maskEdgeSignature > 0.4) {
-        maskScore += 8; // Some mask edges
+        maskScore += 8;
         console.log("BONUS: Some mask edges +8");
       }
 
-      // 5. Brightness contrast
       if (brightnessContrast > 0.7) {
-        maskScore += 15; // Clear contrast difference
+        maskScore += 15;
         console.log("BONUS: Clear brightness contrast +15");
       } else if (brightnessContrast > 0.5) {
-        maskScore += 8; // Some contrast
+        maskScore += 8;
         console.log("BONUS: Some brightness contrast +8");
       }
 
-      // BALANCED threshold - not too high, not too low
-      const hasMask = maskScore >= 50; // Balanced threshold
+      const hasMask = maskScore >= 50;
 
-      // Balanced confidence calculation
       let confidence;
       if (hasMask) {
         if (maskScore >= 80) {
-          confidence = 0.88 + Math.random() * 0.1; // 88-98%
+          confidence = 0.88 + Math.random() * 0.1;
         } else if (maskScore >= 65) {
-          confidence = 0.82 + Math.random() * 0.13; // 82-95%
+          confidence = 0.82 + Math.random() * 0.13;
         } else {
-          confidence = 0.75 + Math.random() * 0.15; // 75-90%
+          confidence = 0.75 + Math.random() * 0.15;
         }
       } else {
         if (maskScore <= 20) {
-          confidence = 0.85 + Math.random() * 0.12; // 85-97%
+          confidence = 0.85 + Math.random() * 0.12;
         } else if (maskScore <= 35) {
-          confidence = 0.78 + Math.random() * 0.17; // 78-95%
+          confidence = 0.78 + Math.random() * 0.17;
         } else {
-          confidence = 0.7 + Math.random() * 0.15; // 70-85%
+          confidence = 0.7 + Math.random() * 0.15;
         }
       }
 
@@ -261,7 +236,6 @@ function createSimpleMaskClassifier() {
   };
 }
 
-// Detect mask color coverage (more inclusive but still specific)
 function detectMaskColorCoverage(imageData, x, y, width, height) {
   const data = imageData.data;
   const imageWidth = imageData.width;
@@ -279,7 +253,7 @@ function detectMaskColorCoverage(imageData, x, y, width, height) {
       const colorVariation =
         Math.abs(r - g) + Math.abs(g - b) + Math.abs(r - b);
 
-      // Mask color patterns (more inclusive)
+      // Mask color patterns
       const isWhiteMask = brightness > 170 && colorVariation < 40; // White masks
       const isLightBlueMask = b > 140 && r < 200 && g < 200; // Blue surgical masks
       const isGrayMask =
@@ -297,14 +271,12 @@ function detectMaskColorCoverage(imageData, x, y, width, height) {
   return maskPixels / totalPixels;
 }
 
-// Smart mouth concealment detection
 function detectMouthConcealment(imageData, x, y, width, height) {
   const data = imageData.data;
   const imageWidth = imageData.width;
   let concealmentScore = 0;
   let samples = 0;
 
-  // Look for absence of mouth features rather than presence
   for (
     let row = y + 2;
     row < y + height - 2 && row < imageData.height - 2;
@@ -321,19 +293,17 @@ function detectMouthConcealment(imageData, x, y, width, height) {
       const b = data[centerIndex + 2];
       const brightness = (r + g + b) / 3;
 
-      // Check for NON-mouth characteristics
-      const isNotLipColor = !(r > g + 20 && r > b + 20 && r > 100); // Not reddish/pink
-      const isNotMouthShadow = brightness > 80; // Not dark mouth cavity
-      const isUniformTexture = true; // Assume uniform for mask
+      const isNotLipColor = !(r > g + 20 && r > b + 20 && r > 100);
+      const isNotMouthShadow = brightness > 80;
+      const isUniformTexture = true;
 
-      // Check surrounding area for edge absence
       const topIndex = ((row - 2) * imageWidth + col) * 4;
       const bottomIndex = ((row + 2) * imageWidth + col) * 4;
       const topBright =
         (data[topIndex] + data[topIndex + 1] + data[topIndex + 2]) / 3;
       const bottomBright =
         (data[bottomIndex] + data[bottomIndex + 1] + data[bottomIndex + 2]) / 3;
-      const hasLowEdge = Math.abs(topBright - bottomBright) < 30; // No strong mouth line
+      const hasLowEdge = Math.abs(topBright - bottomBright) < 30;
 
       if (isNotLipColor && isNotMouthShadow && hasLowEdge) {
         concealmentScore += 1;
@@ -345,19 +315,16 @@ function detectMouthConcealment(imageData, x, y, width, height) {
   return samples > 0 ? concealmentScore / samples : 0;
 }
 
-// Analyze color uniformity
 function analyzeColorUniformity(imageData, x, y, width, height) {
   const data = imageData.data;
   const imageWidth = imageData.width;
   let uniformitySum = 0;
   let patches = 0;
 
-  // Check 5x5 patches
   for (let patchY = y; patchY < y + height - 5; patchY += 5) {
     for (let patchX = x; patchX < x + width - 5; patchX += 5) {
       let patchColors = [];
 
-      // Sample patch colors
       for (let py = 0; py < 5; py++) {
         for (let px = 0; px < 5; px++) {
           const pixelIndex = ((patchY + py) * imageWidth + (patchX + px)) * 4;
@@ -368,7 +335,6 @@ function analyzeColorUniformity(imageData, x, y, width, height) {
         }
       }
 
-      // Calculate variance
       const avgBrightness =
         patchColors.reduce((a, b) => a + b) / patchColors.length;
       const variance =
@@ -386,19 +352,16 @@ function analyzeColorUniformity(imageData, x, y, width, height) {
   return patches > 0 ? uniformitySum / patches : 0;
 }
 
-// Analyze mask edges
 function analyzeMaskEdges(imageData, x, y, width, height) {
   const data = imageData.data;
   const imageWidth = imageData.width;
   let edgeScore = 0;
   let edgeChecks = 0;
 
-  // Check horizontal edges (top and bottom of potential mask)
   const topY = y + Math.floor(height * 0.1);
   const bottomY = y + Math.floor(height * 0.9);
 
   for (let col = x + 10; col < x + width - 10; col += 5) {
-    // Top edge
     if (topY - 3 >= 0 && topY + 3 < imageData.height) {
       const aboveIndex = ((topY - 3) * imageWidth + col) * 4;
       const belowIndex = ((topY + 3) * imageWidth + col) * 4;
@@ -414,7 +377,6 @@ function analyzeMaskEdges(imageData, x, y, width, height) {
       edgeChecks++;
     }
 
-    // Bottom edge
     if (bottomY - 3 >= 0 && bottomY + 3 < imageData.height) {
       const aboveIndex = ((bottomY - 3) * imageWidth + col) * 4;
       const belowIndex = ((bottomY + 3) * imageWidth + col) * 4;
@@ -434,7 +396,6 @@ function analyzeMaskEdges(imageData, x, y, width, height) {
   return edgeChecks > 0 ? edgeScore / edgeChecks : 0;
 }
 
-// Analyze brightness contrast between nose and mouth areas
 function analyzeBrightnessContrast(
   imageData,
   x,
@@ -447,7 +408,6 @@ function analyzeBrightnessContrast(
   const data = imageData.data;
   const imageWidth = imageData.width;
 
-  // Calculate nose area brightness
   let noseBrightness = 0;
   let nosePixels = 0;
   for (
@@ -463,7 +423,6 @@ function analyzeBrightnessContrast(
   }
   noseBrightness /= nosePixels;
 
-  // Calculate mouth area brightness
   let mouthBrightness = 0;
   let mouthPixels = 0;
   for (
@@ -479,38 +438,31 @@ function analyzeBrightnessContrast(
   }
   mouthBrightness /= mouthPixels;
 
-  // Normalize contrast (masks often create brightness differences)
   const contrast = Math.abs(noseBrightness - mouthBrightness);
   return Math.min(contrast / 40, 1); // Normalize to 0-1
 }
 
-// Enable controls after models are loaded
 function enableControls() {
   startWebcamBtn.disabled = false;
   startWebcamBtn.classList.add("btn-enabled");
 }
 
-// Setup event listeners
 function setupEventListeners() {
-  // Webcam controls
   startWebcamBtn.addEventListener("click", startWebcam);
   stopWebcamBtn.addEventListener("click", stopWebcam);
   capturePhotoBtn.addEventListener("click", capturePhoto);
 
-  // Upload controls
   fileInput.addEventListener("change", handleFileSelect);
   uploadDropzone.addEventListener("click", () => fileInput.click());
   uploadDropzone.addEventListener("dragover", handleDragOver);
   uploadDropzone.addEventListener("drop", handleDrop);
 }
 
-// Setup tab switching
 function setupTabSwitching() {
   webcamTab.addEventListener("click", () => switchTab("webcam"));
   uploadTab.addEventListener("click", () => switchTab("upload"));
 }
 
-// Switch between tabs
 function switchTab(tab) {
   if (tab === "webcam") {
     webcamTab.classList.add("active");
@@ -523,14 +475,12 @@ function switchTab(tab) {
     uploadPanel.classList.add("active");
     webcamPanel.classList.remove("active");
 
-    // Stop webcam if switching away
     if (isWebcamActive) {
       stopWebcam();
     }
   }
 }
 
-// Start webcam
 async function startWebcam() {
   try {
     webcamLoading.style.display = "flex";
@@ -575,7 +525,6 @@ async function startWebcam() {
   }
 }
 
-// Stop webcam
 function stopWebcam() {
   if (webcamStream) {
     webcamStream.getTracks().forEach((track) => track.stop());
@@ -599,16 +548,14 @@ function stopWebcam() {
   updateResult(webcamResult, "Webcam stopped.", "info");
 }
 
-// Start detection loop for webcam
 function startDetectionLoop() {
   detectionInterval = setInterval(async () => {
     if (isWebcamActive && webcamVideo.readyState === 4) {
       await detectFacesAndMasks(webcamVideo, webcamCanvas, webcamResult);
     }
-  }, 200); // Run detection every 200ms (5 FPS)
+  }, 200);
 }
 
-// Capture photo from webcam
 async function capturePhoto() {
   if (!isWebcamActive) return;
 
@@ -619,7 +566,6 @@ async function capturePhoto() {
 
   ctx.drawImage(webcamVideo, 0, 0);
 
-  // Convert to blob and create download link
   canvas.toBlob(
     (blob) => {
       const url = URL.createObjectURL(blob);
@@ -636,7 +582,6 @@ async function capturePhoto() {
   updateResult(webcamResult, "Photo captured and downloaded!", "success");
 }
 
-// Handle file selection
 function handleFileSelect(event) {
   const file = event.target.files[0];
   if (file) {
@@ -644,13 +589,11 @@ function handleFileSelect(event) {
   }
 }
 
-// Handle drag over
 function handleDragOver(event) {
   event.preventDefault();
   uploadDropzone.classList.add("drag-over");
 }
 
-// Handle file drop
 function handleDrop(event) {
   event.preventDefault();
   uploadDropzone.classList.remove("drag-over");
@@ -661,7 +604,6 @@ function handleDrop(event) {
   }
 }
 
-// Process uploaded image
 async function processUploadedImage(file) {
   if (!file.type.startsWith("image/")) {
     updateResult(uploadResult, "Please select a valid image file.", "error");
@@ -669,7 +611,6 @@ async function processUploadedImage(file) {
   }
 
   if (file.size > 10 * 1024 * 1024) {
-    // 10MB limit
     updateResult(
       uploadResult,
       "File size too large. Please select an image under 10MB.",
@@ -695,15 +636,12 @@ async function processUploadedImage(file) {
   reader.readAsDataURL(file);
 }
 
-// Main face and mask detection function
 async function detectFacesAndMasks(imageElement, canvas, resultContainer) {
   const ctx = canvas.getContext("2d");
 
   try {
-    // Clear previous drawings
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    // Get predictions from face detection model
     const predictions = await faceDetectionModel.estimateFaces(
       imageElement,
       false
@@ -716,7 +654,6 @@ async function detectFacesAndMasks(imageElement, canvas, resultContainer) {
 
     let results = [];
 
-    // Process each detected face
     for (let i = 0; i < predictions.length; i++) {
       const prediction = predictions[i];
       const [x, y, width, height] = prediction.topLeft.concat(
@@ -725,35 +662,29 @@ async function detectFacesAndMasks(imageElement, canvas, resultContainer) {
         )
       );
 
-      // Extract face region for mask classification
       const faceCanvas = document.createElement("canvas");
       const faceCtx = faceCanvas.getContext("2d");
       faceCanvas.width = width;
       faceCanvas.height = height;
       faceCtx.drawImage(imageElement, x, y, width, height, 0, 0, width, height);
 
-      // Classify mask wearing
       const maskResult = maskClassificationModel.predict(faceCanvas);
 
-      // Draw bounding box
       const color =
         maskResult.prediction === "with_mask" ? "#10B981" : "#EF4444"; // Green for mask, red for no mask
       ctx.strokeStyle = color;
       ctx.lineWidth = 3;
       ctx.strokeRect(x, y, width, height);
 
-      // Draw label
       const label = `${maskResult.prediction.replace("_", " ")} (${(
         maskResult.confidence * 100
       ).toFixed(1)}%)`;
       ctx.fillStyle = color;
       ctx.font = "16px Arial";
 
-      // Background for text
       const textMetrics = ctx.measureText(label);
       ctx.fillRect(x, y - 25, textMetrics.width + 10, 25);
 
-      // Text
       ctx.fillStyle = "white";
       ctx.fillText(label, x + 5, y - 8);
 
@@ -765,7 +696,6 @@ async function detectFacesAndMasks(imageElement, canvas, resultContainer) {
       });
     }
 
-    // Update results display
     displayDetectionResults(resultContainer, results);
   } catch (error) {
     console.error("Detection error:", error);
@@ -777,7 +707,6 @@ async function detectFacesAndMasks(imageElement, canvas, resultContainer) {
   }
 }
 
-// Display detection results
 function displayDetectionResults(container, results) {
   const resultContent = container.querySelector(".result__content");
 
@@ -812,7 +741,6 @@ function displayDetectionResults(container, results) {
 
   html += `</div>`;
 
-  // Add statistics
   const withMask = results.filter((r) => r.prediction === "with_mask").length;
   const withoutMask = results.length - withMask;
 
@@ -832,7 +760,6 @@ function displayDetectionResults(container, results) {
   resultContent.innerHTML = html;
 }
 
-// Update result with message
 function updateResult(container, message, type = "info") {
   const resultContent = container.querySelector(".result__content");
   const icon =
@@ -849,7 +776,6 @@ function updateResult(container, message, type = "info") {
         </div>
     `;
 }
-
 
 const resultStyles = `
 <style>
